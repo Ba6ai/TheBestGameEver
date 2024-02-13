@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
         // Movement
         _moveVector = Vector3.zero;
         animator.SetFloat("Speed", 0);
+        animator.SetFloat("LR", 0);
+
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -38,10 +40,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             _moveVector += transform.right;
+            animator.SetFloat("LR", 1);
         }
         if (Input.GetKey(KeyCode.A))
         {
             _moveVector -= transform.right;
+            animator.SetFloat("LR", -1);
         }
 
         // Jump
