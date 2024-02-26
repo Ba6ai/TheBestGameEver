@@ -140,6 +140,7 @@ MonoBehaviour:
   valueRectTransform: {fileID: 8172858630806272568}
   gameplayUI: {fileID: 1161628310992431061}
   gameOverScreen: {fileID: 2018081482625745762}
+  animator: {fileID: 1032508590792132710}
 --- !u!1 &1032508591000495313
 GameObject:
   m_ObjectHideFlags: 0

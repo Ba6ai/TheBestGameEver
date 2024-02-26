@@ -21,42 +21,47 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Movement
-        _moveVector = Vector3.zero;
-        animator.SetFloat("Speed", 0);
-        animator.SetFloat("LR", 0);
+        MovementUpdate();
+        JumpUpdate();
+    }
 
+    private void MovementUpdate()
+    {
+        //Movement
+        _moveVector = Vector3.zero;
+        var runDirection = 0;
 
         if (Input.GetKey(KeyCode.W))
         {
             _moveVector += transform.forward;
-            animator.SetFloat("Speed", 1);
+            runDirection = 1;
         }
         if (Input.GetKey(KeyCode.S))
         {
             _moveVector -= transform.forward;
-            animator.SetFloat("Speed", -1);
+            runDirection = 2;
         }
         if (Input.GetKey(KeyCode.D))
         {
             _moveVector += transform.right;
-            animator.SetFloat("LR", 1);
+            runDirection = 3;
         }
         if (Input.GetKey(KeyCode.A))
         {
             _moveVector -= transform.right;
-            animator.SetFloat("LR", -1);
+            runDirection = 4;
         }
 
-        // Jump
+        animator.SetInteger("run direction", runDirection);
+    }
+    private void JumpUpdate()
+    {
+        //Jump
         if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
         {
             _fallVelocity = -jumpForce;
-            animator.SetBool("isGrounded", false);
-        } 
-        
-        
-
+            animator.SetTrigger("jump");
+        }
     }
 
     void FixedUpdate()
@@ -72,7 +77,6 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _fallVelocity = 0;
-            animator.SetBool("isGrounded", true);
         }
     }
 }
